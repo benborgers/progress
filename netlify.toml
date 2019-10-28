@@ -1,0 +1,9 @@
+[build]
+  command = "gatsby build"
+  publish = "public"
+
+[[redirects]]
+  from = "https://lhsprogress.netlify.com/*"
+  to = "https://progress.elk.sh/:splat"
+  status = 301
+  force = true
