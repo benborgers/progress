@@ -23,9 +23,8 @@ export default () => {
           }
 
           body {
-            --text-500: hsl(241, 90%, 40%);
-            --text-300: hsl(241, 70%, 60%);
-            --text-100: hsl(241, 100%, 75%);
+            --text-500: hsl(241, 90%, 10%);
+            --text-300: hsl(241, 20%, 45%);
 
             --background: hsl(6, 100%, 90%);
 

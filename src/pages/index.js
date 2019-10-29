@@ -118,7 +118,6 @@ export default () => {
         <motion.p
           css={css`
             font-weight: 600;
-            color: var(--text-100);
             grid-area: logo;
           `}
           {...fadeInFromTop}
