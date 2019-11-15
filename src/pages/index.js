@@ -94,7 +94,7 @@ export default () => {
       opacity: 1
     },
     transition: {
-      delay: 1
+      delay: .6
     }
   }
 
@@ -119,6 +119,7 @@ export default () => {
           css={css`
             font-weight: 600;
             grid-area: logo;
+            letter-spacing: -.02rem;
           `}
           {...fadeInFromTop}
         >
@@ -132,14 +133,14 @@ export default () => {
           `}
           style={{
             opacity: 0,
-            scale: .9
+            scale: .8
           }}
           animate={{
             opacity: 1,
             scale: 1
           }}
           transition={{
-            delay: .5
+            delay: .3
           }}
         >
           <p
@@ -158,6 +159,8 @@ export default () => {
             css={css`
               font-size: 1.2rem;
               text-align: center;
+              font-weight: 500;
+              letter-spacing: -.02rem;
             `}
           >
             of the school year is over
@@ -168,13 +171,13 @@ export default () => {
           <motion.p
             css={css`
               grid-area: exception;
-              font-weight: 600;
               justify-self: end;
               line-height: 1.3;
+              font-style: italic;
             `}
             {...fadeInFromTop}
             transition={{
-              delay: 1.3
+              delay: .9
             }}
           >
             {"our next "}
