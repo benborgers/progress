@@ -23,10 +23,10 @@ export default () => {
           }
 
           body {
-            --text-500: hsl(241, 90%, 10%);
-            --text-300: hsl(241, 20%, 45%);
+            --text-500: hsl(210, 90%, 10%);
+            --text-300: hsl(210, 20%, 40%);
 
-            --background: hsl(6, 100%, 90%);
+            --background: hsl(200, 100%, 93%);
 
             background-color: var(--background);
           }
