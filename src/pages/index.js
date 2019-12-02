@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react"
 import { css } from "@emotion/core"
 import { motion } from "framer-motion"
+import Confetti from "react-confetti"
 
 import Head from "../components/Head"
 import GlobalStyles from "../components/GlobalStyles"
@@ -95,6 +96,26 @@ export default () => {
       delay: .6
     }
   }
+
+
+  /* calculate window dimensions for confetti */
+
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
+
+  useEffect(() => {
+    const listener = () => {
+      setDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight
+      })
+    }
+
+    listener()
+
+    window.addEventListener("resize", listener)
+
+    return () => window.removeEventListener("resize", listener)
+  }, [])
 
   return (
     <>
@@ -191,6 +212,14 @@ export default () => {
           </motion.p>
         }
       </div>
+
+      {/* show confetti if the school year is over */}
+      {percent === 100 && (
+        <Confetti
+          width={dimensions.width + "px"}
+          height={dimensions.height + "px"}
+        />
+      )}
     </>
   )
 }
