@@ -47,7 +47,6 @@ export default () => {
   }
 
   const [percent, setPercent] = useState()
-  // const [daysLeft, setDaysLeft] = useState()
   const [nextException, setNextException] = useState()
 
   const calculate = () => {
@@ -65,7 +64,6 @@ export default () => {
 
     const daysPassed = getWeekdaysInclusive(makeDate(data.bookends.first), nowAsDate)
     const totalDays = getWeekdaysInclusive(makeDate(data.bookends.first), makeDate(data.bookends.last))
-    // setDaysLeft(totalDays - daysPassed)
     
     const percent = Math.round(daysPassed/totalDays * 10000) / 100
     if(percent > 100) {
