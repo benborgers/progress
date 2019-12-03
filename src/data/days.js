@@ -7,11 +7,8 @@
 module.exports = {
   bookends: {
     first: "2019-8-28",
-    last: "2020-6-16" // Last day is officially June 17th, but that's the half day nobody goes to
-
-    /* 
-      0 additional days
-    */
+    last: "2020-6-17" // Last day is officially June 17th, but that's the half day nobody goes to
+    // +1 for snow day on December 3
   },
   exceptions: {
     "2019-8-30": 0,
@@ -26,6 +23,7 @@ module.exports = {
     "2019-11-28": 0,
     "2019-11-29": 0,
     "2019-12-2": 0,
+    "2019-12-3": 0, // Snow day
     "2019-12-23": 0,
     "2019-12-24": 0,
     "2019-12-25": 0,
