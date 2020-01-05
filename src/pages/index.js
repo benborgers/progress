@@ -144,6 +144,7 @@ const StatBox = ({ stat, description, large=false, last=false }) => {
         css={css`
           margin-bottom: 32px;
           text-align: center;
+          letter-spacing: -1.3px;
 
           font-size: ${large ? "96px" : "48px"};
           font-weight: ${large ? "700" : "600"};
