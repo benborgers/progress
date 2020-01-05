@@ -82,7 +82,7 @@ export default () => {
               place-items: center center;
             `}
           >
-            <StatBox stat={percent + "%"} description="Fig. 1. The percentage of the school year that is over." large />
+            <StatBox stat={percent ? percent + "%" : ""} description="Fig. 1. The percentage of the school year that is over." large />
           </div>
 
           <div
