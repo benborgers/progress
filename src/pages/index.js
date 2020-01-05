@@ -1,121 +1,13 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { css } from "@emotion/core"
-import { motion } from "framer-motion"
-import Confetti from "react-confetti"
 
 import Head from "../components/Head"
 import GlobalStyles from "../components/GlobalStyles"
 
-import data from "../data/days.js"
+import useCalculation from "../hooks/useCalculation"
 
 export default () => {
-  const exceptions = []
-  for(const date in data.exceptions) {
-    const pieces = date.split("-")
-    exceptions.push({
-      year: Number(pieces[0]),
-      month: pieces[1] -1,
-      day: Number(pieces[2]),
-      reason: data.exceptions[date]
-    })
-  }
-
-  const getWeekdaysInclusive = (startDate, endDate) => {
-    let count = 0
-    let currentDate = new Date(startDate.getTime())
-    
-    while(currentDate <= endDate) {
-      const dayOfWeek = currentDate.getDay()
-      const matchingException = exceptions.find(date => date.year === currentDate.getFullYear() && date.month === currentDate.getMonth() && date.day === currentDate.getDate())
-      if(!((dayOfWeek === 6) || (dayOfWeek === 0))) {
-        if(!matchingException) {
-          count = count + 1
-        } else if(matchingException.reason === 1) {
-          count = count + .5
-        }
-      }
-      currentDate.setDate(currentDate.getDate() + 1)
-    }
-    
-    return count
-  }
-
-  const makeDate = dateString => {
-    const pieces = dateString.split("-")
-    return new Date(pieces[0], pieces[1] -1, pieces[2])
-  }
-
-  const [percent, setPercent] = useState()
-  const [nextException, setNextException] = useState()
-
-  const calculate = () => {
-    const rawNow = new Date()
-    const endTimeToday = new Date((new Date((new Date((new Date()).setHours(14)).setMinutes(25)))).setSeconds(0))
-    const isAfterEndTime = rawNow > endTimeToday
-    
-    const now = {
-      year: rawNow.getFullYear(),
-      month: rawNow.getMonth(),
-      day: rawNow.getDate() - (!isAfterEndTime ? 1 : 0)
-    }
-
-    const nowAsDate = new Date(now.year, now.month, now.day)
-
-    const daysPassed = getWeekdaysInclusive(makeDate(data.bookends.first), nowAsDate)
-    const totalDays = getWeekdaysInclusive(makeDate(data.bookends.first), makeDate(data.bookends.last))
-    
-    const percent = Math.round(daysPassed/totalDays * 10000) / 100
-    if(percent > 100) {
-      setPercent(100)
-    } else {
-      setPercent(percent)
-    }
-
-
-    const foundNextException = exceptions.find(date => (new Date(date.year, date.month, date.day)) > nowAsDate)
-    setNextException(foundNextException)
-  }
-
-  useEffect(() => {
-    calculate()
-  }, [])
-
-
-  const fadeInFromTop = {
-    style: {
-      y: -20,
-      opacity: 0
-    },
-    animate: {
-      y: 0,
-      opacity: 1
-    },
-    transition: {
-      delay: .6
-    }
-  }
-
-
-  /* calculate window dimensions for confetti */
-
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
-
-  useEffect(() => {
-    const listener = () => {
-      setDimensions({
-        width: window.innerWidth,
-        height: window.innerHeight
-      })
-    }
-
-    listener()
-
-    window.addEventListener("resize", listener)
-
-    return () => window.removeEventListener("resize", listener)
-  }, [])
+  const { percent, daysLeft, nextException } = useCalculation()
 
   return (
     <>
@@ -124,102 +16,157 @@ export default () => {
 
       <div
         css={css`
-          padding: 32px;
-
+          min-height: 100vh;
           display: grid;
-          grid-template-rows: auto 30vh auto;
-          grid-template-columns: 1fr 1fr;
-          grid-template-areas:  "logo exception"
-                                ". ."
-                                "percentage percentage";
+          grid-template-rows: max-content auto;
+
+          @media (max-width: 640px) {
+            div {
+              border: none !important;
+            }
+          }
         `}
       >
-        <motion.p
+        <header
           css={css`
-            font-weight: 600;
-            grid-area: logo;
-            letter-spacing: -.02rem;
+            padding: 24px 16px;
+            border-bottom: 1px solid var(--border);
           `}
-          {...fadeInFromTop}
-        >
-          progress
-        </motion.p>
-
-        <motion.div
-          css={css`
-            grid-area: percentage;
-            justify-self: center
-          `}
-          style={{
-            opacity: 0,
-            scale: .8
-          }}
-          animate={{
-            opacity: 1,
-            scale: 1
-          }}
-          transition={{
-            delay: .3
-          }}
         >
           <p
             css={css`
-              font-weight: 900;
-              font-size: 4rem;
-              color: var(--text-500);
-              font-style: italic;
               text-align: center;
-            `}
-          >
-            {percent}%
-          </p>
-
-          <p
-            css={css`
-              font-size: 1.2rem;
-              text-align: center;
-              font-weight: 500;
-              letter-spacing: -.02rem;
-            `}
-          >
-            of the school year is over
-          </p>
-        </motion.div>
-
-        {nextException &&
-          <motion.p
-            css={css`
-              grid-area: exception;
-              justify-self: end;
+              font-size: 24px;
+              font-weight: 600;
+              letter-spacing: -.8px;
               line-height: 1.3;
-              font-style: italic;
-            `}
-            {...fadeInFromTop}
-            transition={{
-              delay: .9
-            }}
-          >
-            {"our next "}
-            {nextException.reason === 0 ? "day off" : nextException.reason === 1 ? "half day" : "irregular day"}
-            {" is "}
-            {(new Date(nextException.year, nextException.month, nextException.day).toLocaleString("en-US", {
-              timeZone: "America/New_York",
-              weekday: "long",
-              month: "long",
-              day: "numeric"
-            })).toLowerCase()}
-            {"."}
-          </motion.p>
-        }
-      </div>
 
-      {/* show confetti if the school year is over */}
-      {percent === 100 && (
-        <Confetti
-          width={dimensions.width + "px"}
-          height={dimensions.height + "px"}
-        />
-      )}
+              br {
+                display: none;
+              }
+
+              @media (max-width: 640px) {
+                br {
+                  display: block;
+                }
+              }
+            `}
+          >
+            How much school have <br />we made it through?
+          </p>
+        </header>
+
+        <main
+          css={css`
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            grid-template-areas: "percentage percentage" 
+                                "stats next";
+            
+            @media (max-width: 640px) {
+              grid-template-columns: 1fr;
+              grid-template-rows: auto auto auto;
+              grid-template-areas: "percentage" "stats" "next";
+            }
+          `}
+        >
+
+          <div
+            css={css`
+              grid-area: percentage;
+              border-bottom: 1px solid var(--border);
+              padding: 48px 0;
+
+              display: grid;
+              place-items: center center;
+            `}
+          >
+            <StatBox stat={percent + "%"} description="Fig. 1. The percentage of the school year that is over." large />
+          </div>
+
+          <div
+            css={css`
+              grid-area: stats;
+              border-right: 1px solid var(--border);
+              padding: 48px 0;
+
+              display: grid;
+              place-items: center center;
+
+              @media (max-width: 640px) {
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+              }
+            `}
+          >
+            <StatBox stat={daysLeft} description="Fig. 2. The number of school days left." />
+          </div>
+
+          <div
+            css={css`
+              grid-area: next;
+              padding: 48px 0;
+
+              display: grid;
+              place-items: center center;
+            `}
+          >
+            <StatBox
+              stat={nextException ? new Date(nextException.year, nextException.month, nextException.day).toLocaleString("en-US", {
+                month: "long",
+                day: "numeric"
+              }) : ""}
+              description={`Fig. 3. The date of our next ${nextException ? nextException.reason === 0 ? "day off" : 
+              nextException.reason === 1 ? "half day":
+              "unusual day" : ""}.`}
+              last
+            />
+          </div>
+        </main>
+      </div>
     </>
+  )
+}
+
+const StatBox = ({ stat, description, large=false, last=false }) => {
+  return (
+    <div
+      css={css`
+        padding: 0 16px;
+
+        @media (max-width: 640px) {
+          ${last && "margin-bottom: 32px;"}
+        }
+      `}
+    >
+      <p
+        css={css`
+          margin-bottom: 32px;
+          text-align: center;
+
+          font-size: ${large ? "96px" : "48px"};
+          font-weight: ${large ? "700" : "600"};
+
+          @media (max-width: 640px) {
+            font-size: 48px;
+          }
+        `}
+      >
+        {stat}
+      </p>
+
+      <p
+        css={css`
+          font-weight: 500;
+          font-style: italic;
+          color: var(--text-300);
+          text-align: center;
+          line-height: 1.4;
+        `}
+      >
+        {description}
+      </p>
+    </div>
   )
 }

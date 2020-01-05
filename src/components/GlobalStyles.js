@@ -8,14 +8,14 @@ export default () => {
   return (
     <>
       <Helmet>
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spectral:500i,600,700" />
       </Helmet>
 
       <Global
         styles={css`
           * {
-            font-family: "Inter", sans-serif;
-            color: var(--text-300);
+            font-family: var(--serif);
+            color: var(--text-500);
             margin: 0;
             padding: 0;
             -webkit-font-smoothing: antialiased;
@@ -23,16 +23,20 @@ export default () => {
           }
 
           body {
-            --text-500: hsl(210, 90%, 10%);
-            --text-300: hsl(210, 20%, 40%);
+            --text-500: hsl(239, 40%, 24%);
+            --text-300: hsl(239, 20%, 45%);
 
-            --background: hsl(200, 100%, 93%);
+            --border: hsl(239, 10%, 80%);
+
+            --background: hsl(47, 40%, 94%);
+
+            --serif: "Spectral", serif;
 
             background-color: var(--background);
           }
 
           ::selection {
-            background-color: var(--text-300);
+            background-color: var(--text-500);
             color: white;
           }
         `}

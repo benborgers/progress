@@ -2,8 +2,8 @@ import React from "react"
 import { Helmet } from "react-helmet-async"
 
 export default () => {
-  const title = "progress"
-  const description = "Keeping track of how much of the LHS school year we've made it through."
+  const title = "Progress"
+  const description = "How much of the LHS school year have we made it through?"
 
   return (
     <Helmet>
@@ -13,7 +13,7 @@ export default () => {
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
 
-      <link rel="icon" href="https://emojicdn.elk.sh/❄️" />
+      <link rel="icon" href="https://emojicdn.elk.sh/🌖" />
     </Helmet>
   )
 }

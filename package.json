@@ -3,14 +3,11 @@
   "dependencies": {
     "@emotion/core": "^10.0.22",
     "@rhysforyou/gatsby-plugin-react-helmet-async": "^0.1.1",
-    "framer-motion": "^1.6.15",
     "gatsby": "^2.17.4",
     "gatsby-plugin-emotion": "^4.1.12",
     "gatsby-plugin-netlify-cache": "^1.2.0",
     "normalize.css": "^8.0.1",
-    "prop-types": "^15.7.2",
     "react": "^16.11.0",
-    "react-confetti": "^5.0.1",
     "react-dom": "^16.11.0",
     "react-helmet-async": "^1.0.4"
   }
