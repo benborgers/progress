@@ -17,7 +17,7 @@ export default () => {
 
       <meta property="twitter:card" content="summary_large_image" />
 
-      <link rel="icon" href="https://emojicdn.elk.sh/🌖" />
+      <link rel="icon" href="https://emojicdn.elk.sh/🦕" />
     </Helmet>
   )
 }

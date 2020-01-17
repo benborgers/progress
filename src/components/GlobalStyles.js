@@ -8,36 +8,25 @@ export default () => {
   return (
     <>
       <Helmet>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spectral:500i,600,700" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:700&display=swap" />
       </Helmet>
 
       <Global
         styles={css`
           * {
-            font-family: var(--serif);
-            color: var(--text-500);
-            margin: 0;
-            padding: 0;
+            font-family: "Roboto Mono", sans-serif;
+            color: var(--text);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            user-select: none;
           }
 
           body {
-            --text-500: hsl(239, 40%, 24%);
-            --text-300: hsl(239, 20%, 45%);
-
-            --border: hsl(239, 10%, 80%);
-
-            --background: hsl(47, 40%, 94%);
-
-            --serif: "Spectral", serif;
+            --text: hsl(238, 100%, 7%);
+            --accent: hsl(223, 96%, 77%);
+            --background: hsl(0, 0%, 95%);
 
             background-color: var(--background);
-          }
-
-          ::selection {
-            background-color: var(--text-500);
-            color: white;
           }
         `}
       />

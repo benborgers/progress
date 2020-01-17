@@ -2,86 +2,50 @@
 
 import { useState, useEffect } from "react"
 
-import data from "../data/days.js"
-
 export default () => {
-  const exceptions = []
-  for(const date in data.exceptions) {
-    const pieces = date.split("-")
-    exceptions.push({
-      year: Number(pieces[0]),
-      month: pieces[1] -1,
-      day: Number(pieces[2]),
-      reason: data.exceptions[date]
-    })
-  }
-
-  const getWeekdaysInclusive = (startDate, endDate) => {
-    let count = 0
-    let currentDate = new Date(startDate.getTime())
-    
-    while(currentDate <= endDate) {
-      const dayOfWeek = currentDate.getDay()
-      const matchingException = exceptions.find(date => date.year === currentDate.getFullYear() && date.month === currentDate.getMonth() && date.day === currentDate.getDate())
-      if(!((dayOfWeek === 6) || (dayOfWeek === 0))) {
-        if(!matchingException) {
-          count = count + 1
-        } else if(matchingException.reason === 1) {
-          count = count + .5
-        }
-      }
-      currentDate.setDate(currentDate.getDate() + 1)
-    }
-    
-    return count
-  }
-
-  const makeDate = dateString => {
-    const pieces = dateString.split("-")
-    return new Date(pieces[0], pieces[1] -1, pieces[2])
-  }
-
   const [percent, setPercent] = useState()
-  const [daysLeft, setDaysLeft] = useState()
-  const [nextException, setNextException] = useState()
 
-  const calculate = () => {
-    const rawNow = new Date()
-    const endTimeToday = new Date((new Date((new Date((new Date()).setHours(14)).setMinutes(25)))).setSeconds(0))
-    const isAfterEndTime = rawNow > endTimeToday
-    
-    const now = {
-      year: rawNow.getFullYear(),
-      month: rawNow.getMonth(),
-      day: rawNow.getDate() - (!isAfterEndTime ? 1 : 0)
+  const firstDay = new Date(2019, 8 -1, 28).getTime()
+  const lastDay = new Date(2020, 6 -1, 18).getTime()
+  const fullYear = lastDay - firstDay
+
+  const update = () => {
+    const now = new Date().getTime()
+
+    const yearSoFar = now - firstDay
+  
+    const rawPercent = (yearSoFar / fullYear) * 100
+  
+    const roundLength = 8
+    const roundFactor = Math.pow(10, roundLength)
+    const roundedPercent = Math.round(rawPercent * roundFactor) / roundFactor
+
+    let paddedPercent = roundedPercent
+    const decimal = roundedPercent.toString().split(".")[1]
+    const decimalLength = (decimal || "").length
+
+    if(decimalLength < roundLength) {
+      if(!decimal) {
+        paddedPercent += "."
+      }
+      paddedPercent += "0".repeat(roundLength - decimalLength)
     }
-
-    const nowAsDate = new Date(now.year, now.month, now.day)
-
-    const daysPassed = getWeekdaysInclusive(makeDate(data.bookends.first), nowAsDate)
-    const totalDays = getWeekdaysInclusive(makeDate(data.bookends.first), makeDate(data.bookends.last))
-
-    setDaysLeft(totalDays - daysPassed)
-    
-    const percent = Math.round(daysPassed/totalDays * 10000) / 100
-    if(percent > 100) {
-      setPercent(100)
+  
+    if(roundedPercent > 100 || roundedPercent < 0) {
+      setPercent(`100.${"0".repeat(roundLength)}`)
     } else {
-      setPercent(percent)
+      setPercent(paddedPercent)
     }
-
-
-    const foundNextException = exceptions.find(date => (new Date(date.year, date.month, date.day)) > nowAsDate)
-    setNextException(foundNextException)
   }
 
   useEffect(() => {
-    calculate()
+    update()
+    const timer = setInterval(update, 50)
+
+    return () => {
+      clearInterval(timer)
+    }
   }, [])
 
-  return {
-    percent,
-    daysLeft,
-    nextException
-  }
+  return percent
 }
