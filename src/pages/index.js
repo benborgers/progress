@@ -18,6 +18,23 @@ export default () => {
     }, 300)
   }, [])
 
+  
+  const [height, setHeight] = useState()
+
+  useEffect(() => {
+    const listener = () => {
+      setHeight(window.innerHeight)
+    }
+
+    listener()
+
+    window.addEventListener("resize", listener)
+
+    return () => {
+      window.removeEventListener("resize", listener)
+    }
+  }, [])
+
   return (
     <>
       <Head />
@@ -26,7 +43,7 @@ export default () => {
       <div
         css={css`
           display: grid;
-          height: 100vh;
+          height: ${height ? height + "px" : "100vh"};
 
           > * {
             grid-row: 1;
