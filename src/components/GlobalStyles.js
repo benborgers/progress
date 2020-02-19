@@ -8,13 +8,13 @@ export default () => {
   return (
     <>
       <Helmet>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:700&display=swap" />
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </Helmet>
 
       <Global
         styles={css`
           * {
-            font-family: "Roboto Mono", sans-serif;
+            font-family: "Inter", sans-serif;
             color: var(--text);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;

@@ -75,7 +75,8 @@ export default () => {
             font-size: 10vw;
             justify-self: center;
             align-self: center;
-            letter-spacing: -1.5px;
+            letter-spacing: -0.4vw;
+            font-feature-settings: "tnum";
           `}
           variants={{
             hidden: {
