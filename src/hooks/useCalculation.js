@@ -16,7 +16,7 @@ export default () => {
   
     const rawPercent = (yearSoFar / fullYear) * 100
   
-    const roundLength = 8
+    const roundLength = 7
     const roundFactor = Math.pow(10, roundLength)
     const roundedPercent = Math.round(rawPercent * roundFactor) / roundFactor
 
