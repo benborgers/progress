@@ -5,8 +5,8 @@ import { useState, useEffect } from "react"
 export default () => {
   const [percent, setPercent] = useState()
 
-  const firstDay = new Date(2019, 8 -1, 28).getTime()
-  const lastDay = new Date(2020, 6 -1, 18).getTime()
+  const firstDay = new Date(2020, 9 -1, 14).getTime()
+  const lastDay = new Date(2021, 6 -1, 16).getTime()
   const fullYear = lastDay - firstDay
 
   const update = () => {
@@ -31,8 +31,10 @@ export default () => {
       paddedPercent += "0".repeat(roundLength - decimalLength)
     }
   
-    if(roundedPercent > 100 || roundedPercent < 0) {
-      setPercent(`100.${"0".repeat(roundLength)}`)
+    if(roundedPercent > 100) {
+      setPercent(100)
+    } else if(roundedPercent < 0) {
+      setPercent(0)
     } else {
       setPercent(paddedPercent)
     }
