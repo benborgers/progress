@@ -6,7 +6,7 @@ export default () => {
   const [percent, setPercent] = useState()
 
   const firstDay = new Date(2020, 9 -1, 14).getTime()
-  const lastDay = new Date(2021, 6 -1, 16).getTime()
+  const lastDay = new Date(2021, 5 -1, 25).getTime() // for seniors
   const fullYear = lastDay - firstDay
 
   const update = () => {
