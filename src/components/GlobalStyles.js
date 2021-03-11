@@ -23,6 +23,7 @@ export default () => {
 
           body {
             --text: hsl(238, 100%, 7%);
+            --text-light: hsl(238, 10%, 60%);
             --accent: hsl(223, 96%, 77%);
             --background: hsl(0, 0%, 95%);
 

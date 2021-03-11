@@ -2,7 +2,7 @@
   "name": "progress",
   "dependencies": {
     "@emotion/core": "^10.0.22",
-    "framer-motion": "^1.8.4",
+    "framer-motion": "^3.10.2",
     "gatsby": "^2.19.18",
     "gatsby-plugin-emotion": "^4.1.22",
     "gatsby-plugin-react-helmet": "^3.10.0",

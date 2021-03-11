@@ -8,93 +8,114 @@ import GlobalStyles from "../components/GlobalStyles"
 import useCalculation from "../hooks/useCalculation"
 
 export default () => {
-  const percent = useCalculation()
+    const percent = useCalculation()
 
-  const [animateBar, setAnimateBar] = useState(false)
+    const [height, setHeight] = useState()
 
-  useEffect(() => {
-    setTimeout(() => {
-      setAnimateBar(true)
-    }, 300)
-  }, [])
+    useEffect(() => {
+        const listener = () => {
+            setHeight(window.innerHeight)
+        }
 
-  
-  const [height, setHeight] = useState()
+        listener()
 
-  useEffect(() => {
-    const listener = () => {
-      setHeight(window.innerHeight)
-    }
+        window.addEventListener("resize", listener)
 
-    listener()
+        return () => {
+            window.removeEventListener("resize", listener)
+        }
+    }, [])
 
-    window.addEventListener("resize", listener)
+    return (
+        <>
+            <Head />
+            <GlobalStyles />
 
-    return () => {
-      window.removeEventListener("resize", listener)
-    }
-  }, [])
+            <div
+                css={css`
+                display: grid;
+                height: ${height ? height + "px" : "100vh"};
 
-  return (
-    <>
-      <Head />
-      <GlobalStyles />
+                > * {
+                    grid-row: 1;
+                    grid-column: 1;
+                }
+                `}
+            >
+                <motion.h2
+                    css={css`
+                        text-align: center;
+                        font-size: 2rem;
+                        line-height: 1.3;
+                        padding: 0 1rem;
+                        color: var(--text-light);
 
-      <div
-        css={css`
-          display: grid;
-          height: ${height ? height + "px" : "100vh"};
+                        @media (max-width: 640px) {
+                            font-size: 1.3rem;
+                        }
+                    `}
+                    initial={{
+                        y: -100
+                    }}
+                    animate={{
+                        y: 0
+                    }}
+                    transition={{
+                        delay: 0.7
+                    }}
+                >
+                    LHS class of 2021
+                    <br
+                        css={css`
+                            display: none;
 
-          > * {
-            grid-row: 1;
-            grid-column: 1;
-          }
-        `}
-      >
-        <motion.div
-          css={css`
-            background-color: var(--accent);
-            align-self: end;
-          `}
-          variants={{
-            hidden: {
-              height: "0%"
-            },
-            visible: () => ({
-              height: percent + "%"
-            })
-          }}
-          initial="hidden"
-          animate={animateBar ? "visible" : "hidden"}
-        />
+                            @media (max-width: 450px) {
+                                display: block;
+                            }
+                        `}
+                    />
+                    {' '}
+                    school year progress
+                </motion.h2>
 
-        <motion.h1
-          css={css`
-            margin: 0;
-            font-weight: 800;
-            font-size: 10vw;
-            justify-self: center;
-            align-self: center;
-            letter-spacing: -0.4vw;
-            font-feature-settings: "tnum";
-          `}
-          variants={{
-            hidden: {
-              scale: 0
-            },
-            visible: {
-              scale: 1,
-              transition: {
-                delay: .3
-              }
-            }
-          }}
-          initial="hidden"
-          animate="visible"
-        >
-          {percent}%
-        </motion.h1>
-      </div>
-    </>
-  )
+                <motion.div
+                    css={css`
+                        background-color: var(--accent);
+                        align-self: end;
+                    `}
+                    initial={{ height: '0%' }}
+                    animate={{
+                        height: (percent || 0) + '%'
+                    }}
+                />
+
+                <motion.h1
+                    css={css`
+                        margin: 0;
+                        font-weight: 800;
+                        font-size: 10vw;
+                        justify-self: center;
+                        align-self: center;
+                        letter-spacing: -0.4vw;
+                        font-feature-settings: "tnum";
+                    `}
+                    variants={{
+                        hidden: {
+                            scale: 0
+                        },
+                        visible: {
+                            scale: 1,
+                            transition: {
+                                delay: .5
+                            }
+                        }
+                    }}
+                    initial="hidden"
+                    animate="visible"
+                >
+                    {percent}%
+                </motion.h1>
+            </div>
+        </>
+    )
 }
