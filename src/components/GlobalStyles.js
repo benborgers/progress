@@ -1,6 +1,6 @@
 import React from "react"
 import { css, Global } from "@emotion/core"
-import { Helmet } from "react-helmet-async"
+import { Helmet } from "react-helmet"
 
 import "normalize.css"
 
