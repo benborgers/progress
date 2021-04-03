@@ -1,3 +1,3 @@
-# Progress
+# React-Static - Basic Template
 
-Keeping track of how much of the school year we've made it through. 
+To use this template, run `react-static create` and use the `basic` template.
