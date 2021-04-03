@@ -2,6 +2,6 @@ import React from 'react'
 
 export default () => (
   <div style={{ textAlign: 'center' }}>
-    <h1>Welcome to React-Static</h1>
+    <h1>Coming soon...</h1>
   </div>
 )
