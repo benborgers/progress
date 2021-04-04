@@ -1,7 +1,8 @@
 import React from 'react'
 import { Root, Routes, addPrefetchExcludes, Head } from 'react-static'
-//
+
 import { Router } from 'components/Router'
+import ogImage from './images/og.jpg'
 
 import '../dist.css'
 
@@ -14,6 +15,7 @@ function App() {
             <Head>
                 <title>LHS Senior Countdown</title>
                 <link rel="icon" href="https://emojicdn.elk.sh/🕰️" />
+                <meta property="og:image" content={`https://progress.elk.sh${ogImage}`} />
                 <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 
                 {process.env.NODE_ENV === 'production' &&
