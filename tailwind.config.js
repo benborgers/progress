@@ -1,8 +1,17 @@
+const colors = require('tailwindcss/colors')
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
     purge: ['./src/**/*.js'],
     darkMode: false, // or 'media' or 'class'
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                gray: colors.warmGray,
+                orange: colors.orange
+            },
+            fontFamily: ['Inter', ...defaultTheme.fontFamily.sans]
+        },
     },
     variants: {
         extend: {},
