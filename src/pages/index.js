@@ -41,10 +41,37 @@ export default function Index() {
                 initial="hidden"
                 animate="show"
             >
-                <Row label="Days of school left" number={calculation.daysLeft} color="text-yellow-400" variants={item} />
-                <Row label="Weeks of school left" number={calculation.weeksLeft} color="text-orange-400" variants={item} />
-                <Row label="Hours until the end of the school year" number={calculation.minutesLeft} color="text-red-400" variants={item} />
-                <Row label="Percent through the school year" number={calculation.percent} color="text-pink-400" variants={item} />
+                <Row
+                    label="Days of school left"
+                    hint="Only including school days"
+                    number={calculation.daysLeft}
+                    color="text-yellow-400"
+                    variants={item}
+                />
+
+                <Row
+                    label="Weeks of school left"
+                    hint="Only including school days"
+                    number={calculation.weeksLeft}
+                    color="text-orange-400"
+                    variants={item}
+                />
+
+                <Row
+                    label="Hours until the end of the school year"
+                    hint="Including all days"
+                    number={calculation.minutesLeft}
+                    color="text-red-400"
+                    variants={item}
+                />
+
+                <Row
+                    label="Percent through the school year"
+                    hint="Including all days"
+                    number={calculation.percent}
+                    color="text-pink-400"
+                    variants={item}
+                />
             </motion.div>
         </div>
     )
