@@ -12,15 +12,15 @@ export default function Index() {
         show: {
             opacity: 1,
             transition: {
-                delay: 0.5,
-                delayChildren: 0.5,
-                staggerChildren: 0.5
+                delay: 0.2,
+                delayChildren: 0.2,
+                staggerChildren: 0.1
             }
         }
     }
 
     const item = {
-        hidden: { opacity: 0, y: 8 },
+        hidden: { opacity: 0, y: 16 },
         show: { opacity: 1, y: 0 }
     }
 
