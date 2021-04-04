@@ -32,7 +32,7 @@ export default function Index() {
                 animate={{ y: 0, opacity: 1  }}
             >
                 <p className="font-extrabold text-2xl sm:text-3xl">LHS Senior Countdown</p>
-                <p className="text-gray-500 font-semibold flex items-center space-x-1 italic">our last day is {calculation.END.format('MMM    D')}</p>
+                <p className="text-gray-500 font-semibold flex items-center space-x-1 italic">progress.elk.sh</p>
             </motion.div>
 
             <motion.div
