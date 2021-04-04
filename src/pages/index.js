@@ -60,7 +60,7 @@ export default function Index() {
                 <Row
                     label="Hours until the end of the school year"
                     hint="Including all days"
-                    number={calculation.minutesLeft}
+                    number={calculation.hoursLeft}
                     color="text-red-400"
                     variants={item}
                 />

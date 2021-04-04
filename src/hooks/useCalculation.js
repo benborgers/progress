@@ -64,7 +64,7 @@ const format = (number, places) => {
 }
 
 export default function useCalculation() {
-    const [minutesLeft, setMinutesLeft] = React.useState()
+    const [hoursLeft, setHoursLeft] = React.useState()
     const [daysLeft, setDaysLeft] = React.useState()
     const [weeksLeft, setWeeksLeft] = React.useState()
     const [percent, setPercent] = React.useState()
@@ -72,7 +72,7 @@ export default function useCalculation() {
     useEffect(() => {
         setInterval(() => {
             const diffInHours = END.diff(dayjs(), 'hour', true)
-            setMinutesLeft(
+            setHoursLeft(
                 diffInHours < 0 ? 0 : format(diffInHours, 5)
             )
 
@@ -111,7 +111,7 @@ export default function useCalculation() {
 
     return {
         END,
-        minutesLeft,
+        hoursLeft,
         daysLeft,
         weeksLeft,
         percent
