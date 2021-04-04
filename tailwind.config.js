@@ -8,7 +8,8 @@ module.exports = {
         extend: {
             colors: {
                 gray: colors.warmGray,
-                orange: colors.orange
+                orange: colors.orange,
+                pink: colors.pink
             },
             fontFamily: ['Inter', ...defaultTheme.fontFamily.sans]
         },

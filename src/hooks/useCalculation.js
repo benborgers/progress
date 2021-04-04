@@ -7,7 +7,9 @@ dayjs.extend(utc)
 dayjs.extend(timezone)
 dayjs.tz.setDefault('America/New_York')
 
+const START = dayjs.tz('2020-9-14 8:30')
 const END = dayjs.tz('2021-05-28 12:00')
+const startToEndMs = END.diff(START, 'millisecond')
 
 const DATA = {
     '2021-3-29': 1,
@@ -65,12 +67,18 @@ export default function useCalculation() {
     const [minutesLeft, setMinutesLeft] = React.useState()
     const [daysLeft, setDaysLeft] = React.useState()
     const [weeksLeft, setWeeksLeft] = React.useState()
+    const [percent, setPercent] = React.useState()
 
     useEffect(() => {
         setInterval(() => {
             setMinutesLeft(
                 format(END.diff(dayjs(), 'hour', true), 5)
             )
+
+            const startToNowMs = dayjs().diff(START, 'millisecond')
+            let percent = startToNowMs / startToEndMs * 100
+            if(percent > 100) percent = 100
+            setPercent(`${format(percent, 7)}%`)
         }, 10)
 
         const infrequentCalculation = () => {
@@ -105,6 +113,7 @@ export default function useCalculation() {
         END,
         minutesLeft,
         daysLeft,
-        weeksLeft
+        weeksLeft,
+        percent
     }
 }

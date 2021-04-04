@@ -25,7 +25,7 @@ export default function Index() {
     }
 
     return (
-        <div className="p-4 sm:p-8">
+        <div className="p-4 pb-16 sm:pt-8 sm:px-8">
             <motion.div
                 className="text-gray-400 mb-8 sm:mb-16 sm:flex justify-between items-start space-y-1 sm:space-y-0"
                 initial={{ y: -50, opacity: 0 }}
@@ -41,9 +41,10 @@ export default function Index() {
                 initial="hidden"
                 animate="show"
             >
-                <Row label="School days left" number={calculation.daysLeft} color="text-yellow-400" variants={item} />
+                <Row label="Days of school left" number={calculation.daysLeft} color="text-yellow-400" variants={item} />
                 <Row label="Weeks of school left" number={calculation.weeksLeft} color="text-orange-400" variants={item} />
                 <Row label="Hours until the end of the school year" number={calculation.minutesLeft} color="text-red-400" variants={item} />
+                <Row label="Percent through the school year" number={calculation.percent} color="text-pink-400" variants={item} />
             </motion.div>
         </div>
     )
