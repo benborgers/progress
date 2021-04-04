@@ -56,7 +56,7 @@ const DATA = {
 const format = (number, places) => {
     const power = Math.pow(10, places)
     const rounded = Math.round(number * power) / power
-    let [beforeDecimal, afterDecimal] = rounded.toString().split('.')
+    let [beforeDecimal, afterDecimal = ''] = rounded.toString().split('.')
     if(afterDecimal.length !== places) {
         afterDecimal += '0'.repeat(places - afterDecimal.length)
     }
@@ -71,14 +71,14 @@ export default function useCalculation() {
 
     useEffect(() => {
         setInterval(() => {
+            const diffInHours = END.diff(dayjs(), 'hour', true)
             setMinutesLeft(
-                format(END.diff(dayjs(), 'hour', true), 5)
+                diffInHours < 0 ? 0 : format(diffInHours, 5)
             )
 
             const startToNowMs = dayjs().diff(START, 'millisecond')
             let percent = startToNowMs / startToEndMs * 100
-            if(percent > 100) percent = 100
-            setPercent(`${format(percent, 7)}%`)
+            setPercent(`${percent > 100 ? 100 : format(percent, 7)}%`)
         }, 10)
 
         const infrequentCalculation = () => {
