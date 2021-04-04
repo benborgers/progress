@@ -1,8 +1,7 @@
 import React from 'react'
-import { Root, Routes, addPrefetchExcludes } from 'react-static'
+import { Root, Routes, addPrefetchExcludes, Head } from 'react-static'
 //
 import { Router } from 'components/Router'
-import { Helmet } from 'react-helmet'
 
 import '../dist.css'
 
@@ -12,7 +11,7 @@ addPrefetchExcludes(['dynamic'])
 function App() {
     return (
         <Root>
-            <Helmet>
+            <Head>
                 <title>LHS Senior Countdown</title>
                 <link rel="icon" href="https://emojicdn.elk.sh/🕰️" />
                 <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
@@ -20,7 +19,7 @@ function App() {
                 {process.env.NODE_ENV === 'production' &&
                     <script src="https://anteater.benborgers.com/script.js" data-spa="auto" data-site="AKSIRHBI" defer></script>
                 }
-            </Helmet>
+            </Head>
 
             <div>
                 <React.Suspense fallback={<em>Loading...</em>}>
