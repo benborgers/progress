@@ -16,6 +16,10 @@ function App() {
                 <title>LHS Senior Countdown</title>
                 <link rel="icon" href="https://emojicdn.elk.sh/🕰️" />
                 <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+
+                {process.env.NODE_ENV === 'production' &&
+                    <script src="https://anteater.benborgers.com/script.js" data-spa="auto" data-site="AKSIRHBI" defer></script>
+                }
             </Helmet>
 
             <div>
