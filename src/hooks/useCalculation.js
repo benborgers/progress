@@ -86,7 +86,7 @@ export default function useCalculation() {
             // Remove all dates in the past
             for(const datestring in dataLeft) {
                 const day = dayjs.tz(datestring)
-                const endOfDay = day.hour(15)
+                const endOfDay = day.hour(15).minute(10)
 
                 if(dayjs().isAfter(endOfDay)) {
                     delete dataLeft[datestring]
