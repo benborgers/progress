@@ -1,3 +1,3 @@
-# React-Static - Basic Template
+# Progress
 
-To use this template, run `react-static create` and use the `basic` template.
+A senior countdown for LHS, showing how many days/weeks are left of the 2020-2021 school year.
