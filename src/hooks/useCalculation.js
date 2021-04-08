@@ -100,8 +100,9 @@ export default function useCalculation() {
             if(Number.isInteger(tempWeeksLeft)) {
                 setWeeksLeft(tempWeeksLeft)
             } else {
-                const floor = Math.floor(tempWeeksLeft)
-                setWeeksLeft(`${floor} weeks, ${tempDaysLeft - floor * 5} days`)
+                const floorWeeks = Math.floor(tempWeeksLeft)
+                const leftoverDays = tempDaysLeft - floorWeeks * 5
+                setWeeksLeft(`${floorWeeks} ${floorWeeks === 1 ? 'week' : 'weeks'}, ${leftoverDays} ${leftoverDays === 1 ? 'day' : 'days'}`)
             }
         }
 
