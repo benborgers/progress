@@ -1,13 +1,10 @@
 import React from 'react'
 import { Root, Routes, addPrefetchExcludes, Head } from 'react-static'
 
-import { Router } from 'components/Router'
+import { Router } from '@reach/router'
 import ogImage from './images/og.jpg'
 
 import '../dist.css'
-
-// Any routes that start with 'dynamic' will be treated as non-static routes
-addPrefetchExcludes(['dynamic'])
 
 function App() {
     return (
@@ -26,7 +23,7 @@ function App() {
             <div>
                 <React.Suspense fallback={<em>Loading...</em>}>
                     <Router>
-                        <Routes path="*" />
+                        <Routes default />
                     </Router>
                 </React.Suspense>
             </div>
