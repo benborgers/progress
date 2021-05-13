@@ -113,7 +113,7 @@ export default function useCalculation() {
     return {
         END,
         hoursLeft,
-        daysLeft,
+        daysLeft: daysLeft -1, // To match senior countdown
         weeksLeft,
         percent
     }
