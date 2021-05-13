@@ -43,7 +43,7 @@ export default function Index() {
             >
                 <Row
                     label="Days of school left"
-                    hint="Only including school days"
+                    hint="Only including full school days"
                     number={calculation.daysLeft}
                     color="text-yellow-400"
                     variants={item}
@@ -51,7 +51,7 @@ export default function Index() {
 
                 <Row
                     label="Weeks of school left"
-                    hint="Only including school days"
+                    hint="Only including full school days"
                     number={calculation.weeksLeft}
                     color="text-orange-400"
                     variants={item}

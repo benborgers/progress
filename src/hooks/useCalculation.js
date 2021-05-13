@@ -86,9 +86,9 @@ export default function useCalculation() {
             // Remove all dates in the past
             for(const datestring in dataLeft) {
                 const day = dayjs.tz(datestring)
-                const endOfDay = day.hour(15).minute(10)
+                const startOfDay = day.hour(8).minute(15) // 8:15am for people before school
 
-                if(dayjs().isAfter(endOfDay)) {
+                if(dayjs().isAfter(startOfDay)) {
                     delete dataLeft[datestring]
                 }
             }
@@ -113,7 +113,7 @@ export default function useCalculation() {
     return {
         END,
         hoursLeft,
-        daysLeft: daysLeft -1, // To match senior countdown
+        daysLeft,
         weeksLeft,
         percent
     }
