@@ -81,10 +81,12 @@ export default function Index() {
             </div>
 
             {calculation.hoursLeft === 0 && (
-                <Confetti
-                    height={height}
-                    width={width}
-                />
+                <div class="fixed inset-0">
+                    <Confetti
+                        height={height}
+                        width={width}
+                    />
+                </div>
             )}
         </>
     )
