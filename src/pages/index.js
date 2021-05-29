@@ -54,13 +54,13 @@ export default function Index() {
                         variants={item}
                     />
 
-                    {/* <Row
+                    <Row
                         label="Weeks of school left"
                         hint="Only including full school days"
                         number={calculation.weeksLeft}
                         color="text-orange-400"
                         variants={item}
-                    /> */}
+                    />
 
                     <Row
                         label="Hours until the end of the school year"
